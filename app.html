@@ -1,0 +1,30 @@
+<h1>Регистрация на мероприятия</h1>
+
+<input #nameInput placeholder="Название мероприятия">
+
+<button (click)="addEvent(nameInput.value)">
+    Добавить
+</button>
+
+<hr>
+
+@for (event of events(); track event.id) {
+    <div class="card">
+        <h3>{{ event.title }}</h3>
+
+        <p>
+            Участников:
+            {{ event.registered }} / {{ event.seats }}
+        </p>
+
+        @if(event.registered < event.seats) {
+            <button (click)="register(event.id)">
+                Записаться
+            </button>
+        } @else {
+            <b>Свободных мест нет</b>
+        }
+    </div>
+} @empty {
+    <p>Мероприятий пока нет</p>
+}
